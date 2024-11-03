@@ -29,7 +29,7 @@ export default function App() {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [userId, setUserId] = useState(
-    JSON.parse(localStorage.getItem("userId")) || "1"
+    JSON.parse(localStorage.getItem("userId")) || "1264"
   );
   const [email,  setEmail] = useState('');
   const [showTips, setShowTips] = useState({
