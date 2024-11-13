@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { toast } from "react-toastify";
 import axios from "axios";
-import { API_URL } from "../constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,7 +21,7 @@ export default function Wishlist({
   const handleDeleteWishlist = async (wishlistId) => {
     toast.info("Deleting wishlist...");
     try {
-      await axios.delete(`${API_URL}/cocarts/${wishlistId}`); // Fixed template literal
+      await axios.delete(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/cocarts/${wishlistId}`); // Fixed template literal
       await fetchWishlists(userId);
       toast.success("Wishlist deleted successfully");
     } catch (error) {

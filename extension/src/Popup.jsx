@@ -6,7 +6,6 @@ import ProductPreview from "./Components/ProductPreview";
 import Wishlist from "./Components/Wishlist";
 import ProductList from "./Components/ProductList";
 import axios from "axios";
-import { API_URL } from "./constant";
 import { ChevronLeftIcon } from "@heroicons/react/16/solid";
 import DisablePopup from "./DisablePopup";
 import ErrorToastComponent from './Components/ErrorToast'; // Adjust the path as necessary
@@ -53,7 +52,7 @@ export default function Popup({
   // Fetch wishlists for the user
   const fetchWishlists = async (user_id = userId) => {
     try {
-      const response = await axios.get(`${API_URL}/cocarts/${user_id}`);
+      const response = await axios.get(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/cocarts/${user_id}`);
       setWishlists(response.data);
     } catch (error) {
       console.error("Error fetching wishlists:", error);
@@ -80,7 +79,7 @@ export default function Popup({
     if (!currentProduct) {
       try {
         const response = await axios.get(
-          `${API_URL}/cocarts/${wishlistId}/products`
+          `${import.meta.env.VITE_PUBLIC_BACKEND_URL}/cocarts/${wishlistId}/products`
         );
 
         console.log("response", response.data);
@@ -103,7 +102,7 @@ export default function Popup({
 
   const createWishlist = async (wishlistName) => {
     try {
-      await axios.post(`${API_URL}/cocarts`, {
+      await axios.post(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/cocarts`, {
         name: wishlistName,
         user_id: userId,
         slug: `${wishlistName}-${userId}`,
@@ -135,7 +134,7 @@ export default function Popup({
   const removeProduct = async (productId) => {
     try {
       console.log("Deleting product with id:", productId);
-      await axios.delete(`${API_URL}/products/${productId}`);
+      await axios.delete(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/products/${productId}`);
       await handleWishlistChange(selectedWishlistId);
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -160,7 +159,7 @@ export default function Popup({
         cocart_id: selectedWishlistId,
       });
       axios
-        .post(`${API_URL}/cocart-products`, {
+        .post(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/cocart-products`, {
           product: {
             name: currentProduct.title,
             price: convertPriceToNumber(currentProduct.currentPrice),

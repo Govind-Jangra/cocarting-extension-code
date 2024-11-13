@@ -1,7 +1,8 @@
 async function fetchSelectors(websiteName) {
   try {
     const response = await fetch(
-      "https://cron-job-9njv.onrender.com/selector",
+      // write your backend url
+      `http://localhost:8000/selector`,
       {
         method: "POST",
         headers: {
